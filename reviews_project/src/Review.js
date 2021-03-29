@@ -27,6 +27,27 @@ const Review = () => {
       return checkNumber(newIndex)
     })
   }
+  // const randomButton = ()=> {
+  //   let number = Math.random()*people.length
+    
+  //   setIndex(()=> {
+  //     let newIndex = Math.floor(number)
+  //     setIndex(()=> {
+  //       let newIndex = Math.floor(number);
+  //       return checkNumber(newIndex)
+  //     })   
+
+  // }
+  const randomButton = ()=> {
+    let number = Math.random()*people.length
+    setIndex(()=> {
+      let newIndex = Math.floor(number)
+      if(newIndex===index){
+        newIndex += 1
+      }
+      return checkNumber(newIndex)
+    })
+  }
 
   return <article className='review'>
     <div className="img-container">
@@ -42,8 +63,9 @@ const Review = () => {
       <button className='prev-btn' onClick= {prevButton} > <FaChevronLeft /> </button> 
       
       <button className='next-btn' onClick={nextButton}> <FaChevronRight /> </button>
-      {index== people.length &&<button>Surprise me</button>}
+      
     </div>
+    <button className='random-btn' onClick={randomButton}> Surprise me</button>
   </article>
 };
 
