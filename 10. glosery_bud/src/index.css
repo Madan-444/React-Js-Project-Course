@@ -185,12 +185,14 @@ Grocery List
   text-transform: capitalize;
 }
 .alert-danger {
-  color: #721c24;
-  background: #f8d7da;
+  color: #eee0e1;
+  background: #f53545;
+  font-weight: 400;
 }
 .alert-success {
-  color: #155724;
-  background: #d4edda;
+  color: #192b1d;
+  background: #70a77d;
+  font-weight: 400;
 }
 .grocery-form h3 {
   color: var(--clr-primary-1);
@@ -219,7 +221,7 @@ Grocery List
 .submit-btn {
   background: var(--clr-primary-8);
   border-color: transparent;
-  flex: 0 0 5rem;
+  /* flex: 0 0 5rem; */
   display: grid;
   align-items: center;
   padding: 0.25rem;
@@ -295,7 +297,8 @@ Grocery List
   border-color: transparent;
   color: var(--clr-red-light);
   margin: 0 auto;
-  font-size: 0.85rem;
+  font-size: 0.95rem;
+  font-weight: 500;
   letter-spacing: var(--spacing);
   cursor: pointer;
   transition: var(--transition);
@@ -303,4 +306,6 @@ Grocery List
 }
 .clear-btn:hover {
   color: var(--clr-red-dark);
+  font-size: 1rem;
+  text-transform: uppercase;
 }
