@@ -1,9 +1,10 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect,useRef } from 'react'
 import List from './List'
 import Alert from './Alert'
 
 
 const getLocalStorage = ()=> {
+  
   let list = localStorage.getItem('list');
   if(list) {
     return JSON.parse(localStorage.getItem('list'))
@@ -12,6 +13,7 @@ const getLocalStorage = ()=> {
   }
 }
 function App() {
+  const inputRef = useRef(null)
   const [name,setName] = useState('')
   const [list,setList] = useState(getLocalStorage)
   const [isEditing,setIsEditing] = useState(false);
@@ -80,8 +82,10 @@ function App() {
   }
   useEffect(()=> {
     localStorage.setItem("list",JSON.stringify(list))
-
-  },[list])
+   },[list])
+   useEffect(()=> {
+    inputRef.current.focus()
+   },[isEditing])
 
  
   return <section className='section-center'>
@@ -89,7 +93,7 @@ function App() {
       {alert.show && <Alert  {...alert} removeAlert={showAlert} />}
       <h3>The Movies House</h3>
       <div className="form-control">
-        <input type='text' className='grocery' placeholder='e.g. Mr Nobody' value={name} onChange={(e)=> setName(e.target.value)} autoFocus= "true" />
+        <input type='text' className='grocery' placeholder='e.g. Mr Nobody' value={name} onChange={(e)=> setName(e.target.value)} ref= {inputRef} />
         <button type='submit' className='submit-btn'> {isEditing? 'Edit Movie': 'Add Movie'} </button>
       </div>
     </form>
