@@ -6,7 +6,10 @@ const SingleColor = ({rgb,weight,index,hexColor}) => {
   const valueWithHash = `#${hexColor}`
 
   useEffect(()=> {
-    
+    const timeOut = setTimeout(()=> {
+      setAlert(false);
+    },3000)
+    return () => clearTimeout(timeOut)
   },[alert])
 
   const bcg = rgb.join(',')
