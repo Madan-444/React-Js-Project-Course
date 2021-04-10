@@ -1,48 +1,51 @@
-import React, { useState, useContext } from 'react'
-import sublinks from './data'
-console.log('The sublinsk',sublinks)
+import React, { useState, useContext } from "react";
+import sublinks from "./data";
 
 const AppContext = React.createContext();
 
-export const AppProvider = ({children}) => {
+export const AppProvider = ({ children }) => {
+  const [isSubmenuOpen, setIsSubmenu] = useState(false);
+  const [isSidebarOpen, setIsSidebarOpen] = useState(false);
+  const [location, setLocation] = useState({})
+  const [page,setPage] = useState({page:'',links:[]})
 
-    const [isSidebarOpen,setIsSidebarOpen] = useState(false)
-    const [isSubmenuOpen,setIsSubmenuOpen] = useState(false)
-    const [location,setLocation] = useState({})
-    const [page,setPage] = useState({page:'',links:[]})
+  const openSubmenu = (text,coordinate) => {
+      const page = sublinks.find((link)=> link.page===text)
+    //   console.log("My page",page)
+      setPage(page)
+      setLocation(coordinate)
+    setIsSubmenu(true);
+  };
 
-    const openSidebar = ()=> {
-        setIsSidebarOpen(true)
-    }
-    const closeSidebar = ()=> {
-        setIsSidebarOpen(false)
-    }
-    const openSubmenu = (text,coordinates)=> {
-        console.log('The text from navbar',text)
-        setLocation(coordinates)
-        const page = sublinks.find((link)=> link.page=== text )
-        console.log('The page from context',page)
-        setPage(page)
-        setIsSubmenuOpen(true)
-    }
-    const closeSubmenu = ()=> {
-        setIsSubmenuOpen(false)
-    }
+  const closeSubmenu = () => {
+    setIsSubmenu(false);
+  };
+  const openSidebar = () => {
+    setIsSidebarOpen(true);
+  };
 
-    console.log('The isSubmenu:',isSubmenuOpen)
-    return <AppContext.Provider value= {{
-        isSidebarOpen,
+  const closeSidebar = () => {
+    setIsSidebarOpen(false);
+  };
+
+  return (
+    <AppContext.Provider
+      value={{
         isSubmenuOpen,
-        openSidebar,
-        closeSidebar,
+        isSidebarOpen,
         openSubmenu,
         closeSubmenu,
+        openSidebar,
+        closeSidebar,
         location,
-        page
-    }} > {children} </AppContext.Provider>
-}
+        page,
+      }}
+    >
+      {children}}
+    </AppContext.Provider>
+  );
+};
 
-export const useGlobalContext = ()=> {
-    return useContext(AppContext)
-}
-
+export const useGlobalContext = () => {
+  return useContext(AppContext);
+};
